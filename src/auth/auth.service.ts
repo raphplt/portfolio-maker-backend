@@ -11,7 +11,6 @@ export class AuthService {
   ) {}
 
   async signIn(email: string, password: string) {
-    // Ici, username correspond à l'email de l'utilisateur
     const user = await this.usersService.findOneByEmail(email);
 
     if (!user || !user.password || !password) {
@@ -20,10 +19,23 @@ export class AuthService {
     if (!(await bcrypt.compare(password, user.password))) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    // On construit le payload avec l'email et l'id
+
     const payload = { email: user.email, sub: user.id };
+    const accessToken = await this.jwtService.signAsync(payload);
+
     return {
-      access_token: await this.jwtService.signAsync(payload)
+      access_token: accessToken,
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        isActive: user.isActive,
+        githubUsername: user.githubUsername,
+        role: user.role,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+      }
     };
   }
 }
