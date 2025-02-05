@@ -1,9 +1,11 @@
+import { UsersTemplate } from 'src/users_templates/entities/users_template.entity';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
 
 @Entity()
@@ -40,4 +42,9 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  // Relations
+
+  @OneToMany(() => UsersTemplate, (usersTemplate) => usersTemplate.user)
+  templates: UsersTemplate[];
 }

@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { UsersTemplatesModule } from './users_templates/users_templates.module';
+import { UsersTemplate } from './users_templates/entities/users_template.entity';
 
 @Module({
   imports: [
@@ -19,10 +21,11 @@ import { AuthModule } from './auth/auth.module';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [User]
+      entities: [User, UsersTemplate]
     }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    UsersTemplatesModule
   ],
   controllers: [AppController],
   providers: [AppService]
