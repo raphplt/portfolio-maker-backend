@@ -23,6 +23,11 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @Get('email/:email')
+  findByEmail(@Param('email') email: string) {
+    return this.usersService.findByEmail(email);
+  }
+
   // Les autres routes sont sécurisées
   @UseGuards(AuthGuard)
   @Get()
