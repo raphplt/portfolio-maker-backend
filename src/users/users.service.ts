@@ -28,26 +28,6 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-  async findAll(): Promise<User[]> {
-    return this.usersRepository.find();
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    const user = await this.usersRepository.findOne({ where: { email } });
-    if (!user) {
-      throw new NotFoundException(`User with email ${email} not found`);
-    }
-    return user;
-  }
-
-  async findOne(id: number): Promise<User> {
-    const user = await this.usersRepository.findOneBy({ id });
-    if (!user) {
-      throw new NotFoundException(`User with id ${id} not found`);
-    }
-    return user;
-  }
-
   async findOneByEmail(email: string): Promise<User> {
     const user = await this.usersRepository.findOne({
       where: { email },
@@ -67,6 +47,25 @@ export class UsersService {
     });
     if (!user) {
       throw new NotFoundException(`User with email ${email} not found`);
+    }
+    return user;
+  }
+  async findAll(): Promise<User[]> {
+    return this.usersRepository.find();
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await this.usersRepository.findOne({ where: { email } });
+    if (!user) {
+      throw new NotFoundException(`User with email ${email} not found`);
+    }
+    return user;
+  }
+
+  async findOne(id: number): Promise<User> {
+    const user = await this.usersRepository.findOneBy({ id });
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
     }
     return user;
   }
