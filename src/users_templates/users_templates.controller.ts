@@ -30,6 +30,11 @@ export class UsersTemplatesController {
     return this.usersTemplatesService.findOne(+id);
   }
 
+  @Get('user/:userId')
+  findAllByUserId(@Param('userId') userId: string) {
+    return this.usersTemplatesService.findAllByUserId(+userId);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

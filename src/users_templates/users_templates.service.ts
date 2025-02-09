@@ -35,6 +35,13 @@ export class UsersTemplatesService {
     return this.usersTemplateRepository.find({ relations: ['user'] });
   }
 
+  findAllByUserId(userId: number): Promise<UsersTemplate[]> {
+    return this.usersTemplateRepository.find({
+      where: { user: { id: userId } },
+      relations: ['user']
+    });
+  }
+
   async findOne(id: number): Promise<UsersTemplate> {
     const usersTemplate = await this.usersTemplateRepository.findOne({
       where: { id },
