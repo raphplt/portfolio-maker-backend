@@ -14,11 +14,11 @@ import { UsersTemplate } from './users_templates/entities/users_template.entity'
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,
-      port: parseInt(String(process.env.DB_PORT)) || 3306,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      host: process.env.MYSQLHOST,
+      port: parseInt(String(process.env.MYSQLPORT)) || 3306,
+      username: process.env.MYSQLUSER,
+      password: process.env.MYSQLPASSWORD,
+      database: process.env.MYSQL_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
       entities: [User, UsersTemplate]
