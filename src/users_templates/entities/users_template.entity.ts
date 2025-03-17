@@ -12,6 +12,9 @@ export class UsersTemplate {
   @Column({ nullable: true })
   templateTitle?: string;
 
+  @Column({ nullable: true })
+  deployedUrl?: string;
+
   @Column('json')
   informations: {
     name: string;
