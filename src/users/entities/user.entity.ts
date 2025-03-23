@@ -48,6 +48,8 @@ export class User {
 
   // Relations
 
-  @OneToMany(() => UsersTemplate, (usersTemplate) => usersTemplate.user)
+  @OneToMany(() => UsersTemplate, (usersTemplate) => usersTemplate.user, {
+    cascade: true
+  })
   templates: UsersTemplate[];
 }

@@ -79,7 +79,16 @@ export class UsersService {
     return this.findOne(id);
   }
 
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
+  async remove(id: number) {
+    const user = await this.usersRepository.findOne({
+      where: { id },
+      relations: ['templates']
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return await this.usersRepository.remove(user);
   }
 }

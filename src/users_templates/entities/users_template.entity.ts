@@ -82,6 +82,8 @@ export class UsersTemplate {
     textColorSecondary: string;
   };
 
-  @ManyToOne(() => User, (user) => user.templates)
+  @ManyToOne(() => User, (user) => user.templates, {
+    onDelete: 'CASCADE'
+  })
   user: User;
 }
